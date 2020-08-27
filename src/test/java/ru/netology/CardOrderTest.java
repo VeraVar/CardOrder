@@ -29,7 +29,7 @@ public class CardOrderTest {
         form.$("[data-test-id='phone'] input").setValue("70123456789");
         form.$("[data-test-id='agreement']").click();
         form.$(".button").click();
-        $("[data-test-id='phone'].input__sub").shouldHave(text("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678."));
+        $(".input_type_tel .input__sub").shouldHave(text("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678."));
     }
 
     @Test
@@ -49,7 +49,7 @@ public class CardOrderTest {
         form.$("[data-test-id='name'] input").setValue("Салтыков-Щедрин Михаил");
         form.$("[data-test-id='agreement']").click();
         form.$(".button").click();
-        $("[data-test-id='phone'].input__sub").shouldHave(text("Поле обязательно для заполнения"));
+        $(".input_type_tel .input__sub").shouldHave(text("Поле обязательно для заполнения"));
     }
 
     @Test
