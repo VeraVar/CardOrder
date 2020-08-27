@@ -1,0 +1,1 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/a34fq0hcc64fykb3?svg=true)](https://ci.appveyor.com/project/VeraVar/cardorder)
