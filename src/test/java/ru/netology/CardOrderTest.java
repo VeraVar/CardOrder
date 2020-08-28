@@ -1,5 +1,7 @@
 package ru.netology;
 
+import com.codeborne.selenide.Selenide;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.SelenideElement;
@@ -10,10 +12,16 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class CardOrderTest {
 
+    private SelenideElement form;
+
+    @BeforeEach
+    void setup(){
+        open("http://localhost:9999");
+        form = $(".form");
+    }
+
     @Test
     void shouldIncorrectName() {
-        open("http://localhost:9999");
-        SelenideElement form = $(".form");
         form.$("[data-test-id='name'] input").setValue("Test");
         form.$("[data-test-id='phone'] input").setValue("+70123456789");
         form.$("[data-test-id='agreement']").click();
@@ -23,8 +31,6 @@ public class CardOrderTest {
 
     @Test
     void shouldIncorrectPhone() {
-        open("http://localhost:9999");
-        SelenideElement form = $(".form");
         form.$("[data-test-id='name'] input").setValue("Салтыков-Щедрин Михаил");
         form.$("[data-test-id='phone'] input").setValue("70123456789");
         form.$("[data-test-id='agreement']").click();
@@ -34,8 +40,6 @@ public class CardOrderTest {
 
     @Test
     void shouldEmptyName() {
-        open("http://localhost:9999");
-        SelenideElement form = $(".form");
         form.$("[data-test-id='phone'] input").setValue("+70123456789");
         form.$("[data-test-id='agreement']").click();
         form.$(".button").click();
@@ -44,8 +48,6 @@ public class CardOrderTest {
 
     @Test
     void shouldEmptyPhone() {
-        open("http://localhost:9999");
-        SelenideElement form = $(".form");
         form.$("[data-test-id='name'] input").setValue("Салтыков-Щедрин Михаил");
         form.$("[data-test-id='agreement']").click();
         form.$(".button").click();
@@ -54,11 +56,9 @@ public class CardOrderTest {
 
     @Test
     void shouldEmptyCheckbox() {
-        open("http://localhost:9999");
-        SelenideElement form = $(".form");
         form.$("[data-test-id='name'] input").setValue("Салтыков-Щедрин Михаил");
         form.$("[data-test-id='phone'] input").setValue("+70123456789");
         form.$(".button").click();
-        $(".checkbox__text").shouldHave(text("Я соглашаюсь с условиями обработки и использования моих персональных данных и разрешаю сделать запрос в бюро кредитных историй"));
+        $("[data-test-id='agreement'].input_invalid").shouldHave(text("Я соглашаюсь с условиями обработки и использования моих персональных данных и разрешаю сделать запрос в бюро кредитных историй"));
     }
 }
